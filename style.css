@@ -3,3 +3,22 @@
     text-align: center;
     width: 100%;
 }
+
+.card {
+  float: left;
+  margin: 5px 33px 5px 0px;
+  height: 175px;
+  background: blue;
+  color: white;
+  padding: 0;
+}
+
+.card-body {
+  padding: 5px;
+}
+
+.jumbotron {
+  padding: 20px 10px 20px 10px;
+  border: solid 1px lightgray;
+  margin-top: 10px;
+}
