@@ -1,12 +1,29 @@
 var currentCity = "Denver";
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=Denver&units=imperial&appid=3ce1cdd127058c730b93e797e8b094bc";
-var queryURLCurrent = "https://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=3ce1cdd127058c730b93e797e8b094bc";
 var searchHistory = [];
+var storedCities = JSON.parse(localStorage.getItem("userSearches"));
 
 
 $(document).ready(function () {
 
-    $('#currentCityJumbo').text(currentCity + ", US" + " (" + moment().format('dddd MMMM Do') + ")");
+    function displayCities() {
+        $("#pastCities").empty();
+        console.log("stored cities function accesses" + storedCities);
+        if (storedCities !== null) {
+            searchHistory = storedCities;
+            for (var i = 0; i < searchHistory.length; i++) {
+                $("#pastCities").append('<li>' + searchHistory[i] + '</li>');
+
+            }
+            currentCity = searchHistory[searchHistory.length - 1];
+
+        }
+    };
+    displayCities();
+
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&units=imperial&appid=3ce1cdd127058c730b93e797e8b094bc";
+    var queryURLCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&units=imperial&appid=3ce1cdd127058c730b93e797e8b094bc";
+
+
 
     $.ajax({
         url: queryURLCurrent,
@@ -16,6 +33,7 @@ $(document).ready(function () {
         var lat = response.coord.lat;
         var lon = response.coord.lon;
         var uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=3ce1cdd127058c730b93e797e8b094bc&lat=" + lat + "&lon=" + lon;
+        $('#currentCityJumbo').text(response.name + ", " + response.sys.country + " (" + moment().format('dddd MMMM Do') + ")");
         $('#currentWind').text("Wind Speed: " + response.wind.speed + " MPH");
         $('#currentHum').text("Humidity: " + response.main.humidity + "%");
         $('#currentTemp').text("Temperature: " + response.main.temp + " ˚F");
@@ -81,23 +99,27 @@ $(document).ready(function () {
     // *****************************************************************************************************
     // *****************************************************************************************************
 
+    function refreshStorage(name) {
+        searchHistory.push(name);
+        localStorage.setItem("userSearches", JSON.stringify(searchHistory));
+        storedCities = JSON.parse(localStorage.getItem("userSearches"));
+        console.log("New storedCities" + storedCities);
+        console.log(displayCities());
+    }
+    
     $("#searchBtn").click(function (event) {
         event.preventDefault();
         currentCity = $("#userSearch").val();
+        $("#userSearch").val('');
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&units=imperial&appid=3ce1cdd127058c730b93e797e8b094bc";
         var queryURLCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&units=imperial&appid=3ce1cdd127058c730b93e797e8b094bc";
-        searchHistory.push(currentCity);
-        console.log(searchHistory);
-        $("#userSearch").textContent("");
-        
 
         $.ajax({
             url: queryURLCurrent,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
 
-            $('#currentCityJumbo').text(response.name +", " + response.sys.country + " (" + moment().format('dddd MMMM Do') + ")");
+            $('#currentCityJumbo').text(response.name + ", " + response.sys.country + " (" + moment().format('dddd MMMM Do') + ")");
 
             var lat = response.coord.lat;
             var lon = response.coord.lon;
@@ -106,6 +128,7 @@ $(document).ready(function () {
             $('#currentHum').text("Humidity: " + response.main.humidity + "%");
             $('#currentTemp').text("Temperature: " + response.main.temp + " ˚F");
 
+            refreshStorage(response.name)
 
             $.ajax({
                 url: uvQueryURL,
@@ -122,7 +145,6 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
 
             for (var i = 0; i < response.list.length; i++) {
                 if (response.list[i].dt_txt === (moment().add(1, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
@@ -160,7 +182,7 @@ $(document).ready(function () {
             }
 
         });
-
+        
 
     })
 
