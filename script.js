@@ -30,7 +30,7 @@ $(document).ready(function () {
 
         var lat = response.coord.lat;
         var lon = response.coord.lon;
-        var uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=3ce1cdd127058c730b93e797e8b094bc&lat=" + lat + "&lon=" + lon;
+        var uvQueryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=3ce1cdd127058c730b93e797e8b094bc&lat=" + lat + "&lon=" + lon;
         $('#currentCityJumbo').text(response.name + ", " + response.sys.country + " (" + moment().format('dddd MMMM Do') + ")");
         $('#currentWind').text("Wind Speed: " + response.wind.speed + " MPH");
         $('#currentHum').text("Humidity: " + response.main.humidity + "%");
