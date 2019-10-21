@@ -35,7 +35,7 @@ $(document).ready(function () {
         $('#currentWind').text("Wind Speed: " + response.wind.speed + " MPH");
         $('#currentHum').text("Humidity: " + response.main.humidity + "%");
         $('#currentTemp').text("Temperature: " + response.main.temp + " ˚F");
-        $("#currentIcon").attr("src","http://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
+        $("#currentIcon").attr("src","https://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
 
 
         $.ajax({
@@ -67,7 +67,7 @@ $(document).ready(function () {
             if (response.list[i].dt_txt === (moment().add(1, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day1Temp").text("Temp: " + response.list[i].main.temp + " ˚F");
                 $("#day1Hum").text("Humidity: " + response.list[i].main.humidity + "%");
-                $("#day1Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[i].weather[0].icon+"@2x.png");
+                $("#day1Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[i].weather[0].icon+"@2x.png");
             }
         }                  
 
@@ -75,7 +75,7 @@ $(document).ready(function () {
             if (response.list[j].dt_txt === (moment().add(2, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day2Temp").text("Temp: " + response.list[j].main.temp + " ˚F");
                 $("#day2Hum").text("Humidity: " + response.list[j].main.humidity + "%");
-                $("#day2Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[j].weather[0].icon+"@2x.png");
+                $("#day2Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[j].weather[0].icon+"@2x.png");
             }
         }
 
@@ -83,7 +83,7 @@ $(document).ready(function () {
             if (response.list[k].dt_txt === (moment().add(3, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day3Temp").text("Temp: " + response.list[k].main.temp + " ˚F");
                 $("#day3Hum").text("Humidity: " + response.list[k].main.humidity + "%");
-                $("#day3Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[k].weather[0].icon+"@2x.png");
+                $("#day3Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[k].weather[0].icon+"@2x.png");
             }
         }
 
@@ -91,7 +91,7 @@ $(document).ready(function () {
             if (response.list[l].dt_txt === (moment().add(4, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day4Temp").text("Temp: " + response.list[l].main.temp + " ˚F");
                 $("#day4Hum").text("Humidity: " + response.list[l].main.humidity + "%");
-                $("#day4Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[l].weather[0].icon+"@2x.png");
+                $("#day4Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[l].weather[0].icon+"@2x.png");
             }
         }
 
@@ -99,7 +99,7 @@ $(document).ready(function () {
             if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day5Temp").text("Temp: " + response.list[m].main.temp + " ˚F");
                 $("#day5Hum").text("Humidity: " + response.list[m].main.humidity + "%");
-                $("#day5Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
+                $("#day5Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
             }
         }
 
@@ -135,11 +135,11 @@ $(document).ready(function () {
 
             var lat = response.coord.lat;
             var lon = response.coord.lon;
-            var uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=3ce1cdd127058c730b93e797e8b094bc&lat=" + lat + "&lon=" + lon;
+            var uvQueryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=3ce1cdd127058c730b93e797e8b094bc&lat=" + lat + "&lon=" + lon;
             $('#currentWind').text("Wind Speed: " + response.wind.speed + " MPH");
             $('#currentHum').text("Humidity: " + response.main.humidity + "%");
             $('#currentTemp').text("Temperature: " + response.main.temp + " ˚F");
-            $("#currentIcon").attr("src","http://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
+            $("#currentIcon").attr("src","https://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
 
             refreshStorage(response.name)
 
@@ -170,7 +170,7 @@ $(document).ready(function () {
                 if (response.list[i].dt_txt === (moment().add(1, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day1Temp").text("Temp: " + response.list[i].main.temp + " ˚F");
                     $("#day1Hum").text("Humidity: " + response.list[i].main.humidity + "%");
-                    $("#day1Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[i].weather[0].icon+"@2x.png");
+                    $("#day1Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[i].weather[0].icon+"@2x.png");
                 }
             }
 
@@ -178,7 +178,7 @@ $(document).ready(function () {
                 if (response.list[j].dt_txt === (moment().add(2, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day2Temp").text("Temp: " + response.list[j].main.temp + " ˚F");
                     $("#day2Hum").text("Humidity: " + response.list[j].main.humidity + "%");
-                    $("#day2Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[j].weather[0].icon+"@2x.png");
+                    $("#day2Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[j].weather[0].icon+"@2x.png");
                 }
             }
 
@@ -186,7 +186,7 @@ $(document).ready(function () {
                 if (response.list[k].dt_txt === (moment().add(3, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day3Temp").text("Temp: " + response.list[k].main.temp + " ˚F");
                     $("#day3Hum").text("Humidity: " + response.list[k].main.humidity + "%");
-                    $("#day3Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[k].weather[0].icon+"@2x.png");
+                    $("#day3Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[k].weather[0].icon+"@2x.png");
                 }
             }
 
@@ -194,7 +194,7 @@ $(document).ready(function () {
                 if (response.list[l].dt_txt === (moment().add(4, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day4Temp").text("Temp: " + response.list[l].main.temp + " ˚F");
                     $("#day4Hum").text("Humidity: " + response.list[l].main.humidity + "%");
-                    $("#day4Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[l].weather[0].icon+"@2x.png");
+                    $("#day4Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[l].weather[0].icon+"@2x.png");
                 }
             }
 
@@ -202,7 +202,7 @@ $(document).ready(function () {
                 if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day5Temp").text("Temp: " + response.list[m].main.temp + " ˚F");
                     $("#day5Hum").text("Humidity: " + response.list[m].main.humidity + "%");
-                    $("#day5Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
+                    $("#day5Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
                 }
             }
 
