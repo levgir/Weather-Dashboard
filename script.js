@@ -47,7 +47,7 @@ $(document).ready(function () {
             if(response.value<3) {
                 $('#currentUV').add("span").css('background-color', 'green');
             }else if (response.value>=3 && response.value<6) {
-                $('#currentUV').add("span").css('background-color', 'yellow');
+                $('#currentUV').add("span").css('background-color', 'orange');
             }else{
                 $('#currentUV').add("span").css('background-color', 'red');
             }
