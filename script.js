@@ -7,12 +7,10 @@ $(document).ready(function () {
 
     function displayCities() {
         $("#pastCities").empty();
-        console.log("stored cities function accesses" + storedCities);
         if (storedCities !== null) {
             searchHistory = storedCities;
             for (var i = 0; i < searchHistory.length; i++) {
                 $("#pastCities").append('<li>' + searchHistory[i] + '</li>');
-
             }
             currentCity = searchHistory[searchHistory.length - 1];
 
@@ -37,6 +35,7 @@ $(document).ready(function () {
         $('#currentWind').text("Wind Speed: " + response.wind.speed + " MPH");
         $('#currentHum').text("Humidity: " + response.main.humidity + "%");
         $('#currentTemp').text("Temperature: " + response.main.temp + " ˚F");
+        $("#currentIcon").attr("src","http://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
 
 
         $.ajax({
@@ -44,7 +43,14 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
 
-            $('#currentUV').text("UV Index: " + response.value);
+            $('#currentUV').text(response.value);
+            if(response.value<3) {
+                $('#currentUV').add("span").css('background-color', 'green');
+            }else if (response.value>=3 && response.value<6) {
+                $('#currentUV').add("span").css('background-color', 'yellow');
+            }else{
+                $('#currentUV').add("span").css('background-color', 'red');
+            }
 
         });
 
@@ -55,38 +61,45 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
 
+        console.log(response);
+
         for (var i = 0; i < response.list.length; i++) {
-            if (response.list[i].dt_txt === (moment().add(1, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+            if (response.list[i].dt_txt === (moment().add(1, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day1Temp").text("Temp: " + response.list[i].main.temp + " ˚F");
                 $("#day1Hum").text("Humidity: " + response.list[i].main.humidity + "%");
+                $("#day1Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[i].weather[0].icon+"@2x.png");
             }
-        }
+        }                  
 
         for (var j = 0; j < response.list.length; j++) {
-            if (response.list[j].dt_txt === (moment().add(2, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+            if (response.list[j].dt_txt === (moment().add(2, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day2Temp").text("Temp: " + response.list[j].main.temp + " ˚F");
                 $("#day2Hum").text("Humidity: " + response.list[j].main.humidity + "%");
+                $("#day2Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[j].weather[0].icon+"@2x.png");
             }
         }
 
         for (var k = 0; k < response.list.length; k++) {
-            if (response.list[k].dt_txt === (moment().add(3, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+            if (response.list[k].dt_txt === (moment().add(3, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day3Temp").text("Temp: " + response.list[k].main.temp + " ˚F");
                 $("#day3Hum").text("Humidity: " + response.list[k].main.humidity + "%");
+                $("#day3Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[k].weather[0].icon+"@2x.png");
             }
         }
 
         for (var l = 0; l < response.list.length; l++) {
-            if (response.list[l].dt_txt === (moment().add(4, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+            if (response.list[l].dt_txt === (moment().add(4, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day4Temp").text("Temp: " + response.list[l].main.temp + " ˚F");
                 $("#day4Hum").text("Humidity: " + response.list[l].main.humidity + "%");
+                $("#day4Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[l].weather[0].icon+"@2x.png");
             }
         }
 
         for (var m = 0; m < response.list.length; m++) {
-            if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+            if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                 $("#day5Temp").text("Temp: " + response.list[m].main.temp + " ˚F");
                 $("#day5Hum").text("Humidity: " + response.list[m].main.humidity + "%");
+                $("#day5Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
             }
         }
 
@@ -103,8 +116,7 @@ $(document).ready(function () {
         searchHistory.push(name);
         localStorage.setItem("userSearches", JSON.stringify(searchHistory));
         storedCities = JSON.parse(localStorage.getItem("userSearches"));
-        console.log("New storedCities" + storedCities);
-        console.log(displayCities());
+        displayCities();
     }
     
     $("#searchBtn").click(function (event) {
@@ -127,6 +139,7 @@ $(document).ready(function () {
             $('#currentWind').text("Wind Speed: " + response.wind.speed + " MPH");
             $('#currentHum').text("Humidity: " + response.main.humidity + "%");
             $('#currentTemp').text("Temperature: " + response.main.temp + " ˚F");
+            $("#currentIcon").attr("src","http://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
 
             refreshStorage(response.name)
 
@@ -135,7 +148,14 @@ $(document).ready(function () {
                 method: "GET"
             }).then(function (response) {
 
-                $('#currentUV').text("UV Index: " + response.value);
+                $('#currentUV').text(response.value);
+                if(response.value<3) {
+                    $('#currentUV').add("span").css('background-color', 'green');
+                }else if (response.value>=3 && response.value<6) {
+                    $('#currentUV').add("span").css('background-color', 'yellow');
+                }else{
+                    $('#currentUV').add("span").css('background-color', 'red');
+                }
 
             });
 
@@ -147,37 +167,42 @@ $(document).ready(function () {
         }).then(function (response) {
 
             for (var i = 0; i < response.list.length; i++) {
-                if (response.list[i].dt_txt === (moment().add(1, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+                if (response.list[i].dt_txt === (moment().add(1, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day1Temp").text("Temp: " + response.list[i].main.temp + " ˚F");
                     $("#day1Hum").text("Humidity: " + response.list[i].main.humidity + "%");
+                    $("#day1Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[i].weather[0].icon+"@2x.png");
                 }
             }
 
             for (var j = 0; j < response.list.length; j++) {
-                if (response.list[j].dt_txt === (moment().add(2, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+                if (response.list[j].dt_txt === (moment().add(2, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day2Temp").text("Temp: " + response.list[j].main.temp + " ˚F");
                     $("#day2Hum").text("Humidity: " + response.list[j].main.humidity + "%");
+                    $("#day2Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[j].weather[0].icon+"@2x.png");
                 }
             }
 
             for (var k = 0; k < response.list.length; k++) {
-                if (response.list[k].dt_txt === (moment().add(3, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+                if (response.list[k].dt_txt === (moment().add(3, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day3Temp").text("Temp: " + response.list[k].main.temp + " ˚F");
                     $("#day3Hum").text("Humidity: " + response.list[k].main.humidity + "%");
+                    $("#day3Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[k].weather[0].icon+"@2x.png");
                 }
             }
 
             for (var l = 0; l < response.list.length; l++) {
-                if (response.list[l].dt_txt === (moment().add(4, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+                if (response.list[l].dt_txt === (moment().add(4, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day4Temp").text("Temp: " + response.list[l].main.temp + " ˚F");
                     $("#day4Hum").text("Humidity: " + response.list[l].main.humidity + "%");
+                    $("#day4Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[l].weather[0].icon+"@2x.png");
                 }
             }
 
             for (var m = 0; m < response.list.length; m++) {
-                if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
+                if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
                     $("#day5Temp").text("Temp: " + response.list[m].main.temp + " ˚F");
                     $("#day5Hum").text("Humidity: " + response.list[m].main.humidity + "%");
+                    $("#day5Icon").attr("src","http://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
                 }
             }
 

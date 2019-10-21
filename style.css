@@ -2,23 +2,60 @@
     float: left;
     text-align: center;
     width: 100%;
+    color: white;
+}
+
+.sidebar {
+  background-color: whitesmoke;
+  padding-top: 10px;
 }
 
 .card {
   float: left;
   margin: 5px 33px 5px 0px;
-  height: 175px;
+  height: 200px;
   background: blue;
   color: white;
   padding: 0;
 }
 
 .card-body {
-  padding: 5px;
+  padding: 10px;
 }
 
 .jumbotron {
   padding: 20px 10px 20px 10px;
   border: solid 1px lightgray;
-  margin-top: 10px;
+  margin-top: 20px;
+  background-color: white;
 }
+
+#pastCities {
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+  background-color: white;
+  color: gray;
+}
+
+li {
+  border: solid 1px lightgray;
+  padding: 10px;
+}
+
+#currentUV {
+  display: inline;
+  margin-left: 3px;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+#uvIndex{
+  display: inline;
+}
+
+#jumbotronText {
+  color: gray;
+}
+
