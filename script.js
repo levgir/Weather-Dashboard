@@ -96,7 +96,7 @@ $(document).ready(function () {
         }
 
         for (var m = 0; m < response.list.length; m++) {
-            if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
+            if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
                 $("#day5Temp").text("Temp: " + response.list[m].main.temp + " ˚F");
                 $("#day5Hum").text("Humidity: " + response.list[m].main.humidity + "%");
                 $("#day5Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
@@ -152,7 +152,7 @@ $(document).ready(function () {
                 if(response.value<3) {
                     $('#currentUV').add("span").css('background-color', 'green');
                 }else if (response.value>=3 && response.value<6) {
-                    $('#currentUV').add("span").css('background-color', 'yellow');
+                    $('#currentUV').add("span").css('background-color', 'orange');
                 }else{
                     $('#currentUV').add("span").css('background-color', 'red');
                 }
@@ -199,7 +199,7 @@ $(document).ready(function () {
             }
 
             for (var m = 0; m < response.list.length; m++) {
-                if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 21:00:00")) {
+                if (response.list[m].dt_txt === (moment().add(5, 'day').format('YYYY-MM-DD') + " 12:00:00")) {
                     $("#day5Temp").text("Temp: " + response.list[m].main.temp + " ˚F");
                     $("#day5Hum").text("Humidity: " + response.list[m].main.humidity + "%");
                     $("#day5Icon").attr("src","https://openweathermap.org/img/wn/"+response.list[m].weather[0].icon+"@2x.png");
